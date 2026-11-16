@@ -2,9 +2,9 @@
 
 namespace MertAydin\ComposerMonitor;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
 use MertAydin\ComposerMonitor\Notifications\ComposerAlertNotification;
 use Throwable;
