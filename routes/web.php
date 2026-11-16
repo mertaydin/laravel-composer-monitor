@@ -10,4 +10,5 @@ Route::group([
 ], function () {
     Route::get('/', [ComposerMonitorController::class, 'index'])->name('index');
     Route::post('/check', [ComposerMonitorController::class, 'check'])->name('check');
+    Route::post('/preferences', [ComposerMonitorController::class, 'preferences'])->name('preferences');
 });
