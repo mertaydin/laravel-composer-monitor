@@ -2,7 +2,6 @@
 
 namespace MertAydin\ComposerMonitor;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use MertAydin\ComposerMonitor\Console\CheckComposerCommand;
 
@@ -27,12 +26,8 @@ class ComposerMonitorServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(dirname(__DIR__).'/routes/web.php');
         }
 
-        App::booted(function () {
-            if (function_exists('session') && session()->has('composer-monitor.locale')) {
-                App::setLocale(session('composer-monitor.locale'));
-            }
-        });
-
-        if ($this->app->runningInConsole()) $this->commands([CheckComposerCommand::class]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([CheckComposerCommand::class]);
+        }
     }
 }
