@@ -4,6 +4,7 @@ namespace MertAydin\ComposerMonitor;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Notification;
 use MertAydin\ComposerMonitor\Notifications\ComposerAlertNotification;
 use Throwable;
@@ -52,7 +53,8 @@ class ComposerAlertManager
                 continue;
             }
 
-            $dedupeTtl = (int) ($rules['dedupe_ttl'] ?? 86400);\n            $dedupeTtl > 0 ? Cache::put($key, true, $dedupeTtl) : Cache::forever($key, true);
+            $dedupeTtl = (int) ($rules['dedupe_ttl'] ?? 86400);
+            $dedupeTtl > 0 ? Cache::put($key, true, $dedupeTtl) : Cache::forever($key, true);
             $alert['id'] = $fingerprint;
             $alert['created_at'] = now()->toIso8601String();
             $fresh[] = $alert;
@@ -91,7 +93,15 @@ class ComposerAlertManager
         }
 
         if (in_array('database', $channels, true)) {
-            $users = (array) ($rules['users'] ?? []);\n            $model = $rules['user_model'] ?? config('auth.providers.users.model');\n            $userIds = (array) ($rules['user_ids'] ?? []);\n\n            if ($userIds !== [] && is_string($model) && is_subclass_of($model, Model::class)) {\n                $users = array_merge($users, $model::query()->whereKey($userIds)->get()->all());\n            }\n\n            foreach ($users as $user) {
+            $users = (array) ($rules['users'] ?? []);
+            $model = $rules['user_model'] ?? config('auth.providers.users.model');
+            $userIds = (array) ($rules['user_ids'] ?? []);
+
+            if ($userIds !== [] && is_string($model) && is_subclass_of($model, Model::class)) {
+                $users = array_merge($users, $model::query()->whereKey($userIds)->get()->all());
+            }
+
+            foreach ($users as $user) {
                 if (is_object($user) && method_exists($user, 'notify')) {
                     try {
                         $user->notify(new ComposerAlertNotification($alert));
@@ -104,7 +114,8 @@ class ComposerAlertManager
 
         if (in_array('slack', $channels, true) && filled($rules['slack_webhook'] ?? null)) {
             try {
-                Http::timeout(10)->post($rules['slack_webhook'], ['text' => '*'.$alert['title']."*\n".$alert['message']])->throw();
+                Http::timeout(10)->post($rules['slack_webhook'], ['text' => '*'.$alert['title']."*
+".$alert['message']])->throw();
             } catch (Throwable $exception) {
                 report($exception);
             }
@@ -112,7 +123,8 @@ class ComposerAlertManager
 
         if (in_array('discord', $channels, true) && filled($rules['discord_webhook'] ?? null)) {
             try {
-                Http::timeout(10)->post($rules['discord_webhook'], ['content' => '**'.$alert['title']."**\n".$alert['message']])->throw();
+                Http::timeout(10)->post($rules['discord_webhook'], ['content' => '**'.$alert['title']."**
+".$alert['message']])->throw();
             } catch (Throwable $exception) {
                 report($exception);
             }
