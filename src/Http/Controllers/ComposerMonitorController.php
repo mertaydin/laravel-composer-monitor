@@ -10,6 +10,10 @@ class ComposerMonitorController extends Controller
 {
     public function index(ComposerMonitor $monitor)
     {
+        if (session()->has('composer-monitor.locale')) {
+            app()->setLocale(session('composer-monitor.locale'));
+        }
+
         $packages = $monitor->packages();
         $latest = $monitor->latest() ?? [];
         $outdated = $latest['outdated'] ?? [];
@@ -26,6 +30,7 @@ class ComposerMonitorController extends Controller
     {
         $result = $monitor->check();
         $routeName = config('composer-monitor.route.name', 'composer-monitor.').'index';
+
         return redirect()->route($routeName)->with(
             isset($result['error']) ? 'error' : 'status',
             isset($result['error']) ? __('composer-monitor::messages.check_failed', ['message' => $result['error']]) : __('composer-monitor::messages.check_complete')
@@ -37,6 +42,7 @@ class ComposerMonitorController extends Controller
         $locale = $request->validate(['locale' => 'required|string|in:tr,en'])['locale'];
         session(['composer-monitor.locale' => $locale]);
         app()->setLocale($locale);
+
         return redirect()->back();
     }
 }
