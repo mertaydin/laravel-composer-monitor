@@ -7,12 +7,10 @@ use MertAydin\ComposerMonitor\ComposerMonitor;
 
 class ComposerMonitorController extends Controller
 {
-    public function __construct(protected ComposerMonitor $monitor) {}
-    
-    public function index()
+    public function index(ComposerMonitor $monitor)
     {
-        $packages = $this->monitor->packages();
-        $latest = $this->monitor->latest() ?? [];
+        $packages = $monitor->packages();
+        $latest = $monitor->latest() ?? [];
         $outdated = $latest['outdated'] ?? [];
         $advisories = $latest['advisories'] ?? [];
         $abandoned = $latest['abandoned'] ?? [];
@@ -26,9 +24,9 @@ class ComposerMonitorController extends Controller
         ));
     }
 
-    public function check()
+    public function check(ComposerMonitor $monitor)
     {
-        $result = $this->monitor->check();
+        $result = $monitor->check();
         $routeName = config('composer-monitor.route.name', 'composer-monitor.').'index';
 
         return redirect()->route($routeName)->with(
