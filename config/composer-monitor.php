@@ -22,7 +22,7 @@ return [
         'packages' => [],
         'channels' => ['dashboard', 'mail', 'database', 'slack', 'discord'],
         'mail_to' => array_filter(array_map('trim', explode(',', (string) env('COMPOSER_MONITOR_ALERT_MAIL_TO', '')))),
-        'users' => [],
+        'users' => [],\n        'user_model' => env('COMPOSER_MONITOR_ALERT_USER_MODEL'),\n        'user_ids' => [],\n        'dedupe_ttl' => 86400,
         'slack_webhook' => env('COMPOSER_MONITOR_SLACK_WEBHOOK'),
         'discord_webhook' => env('COMPOSER_MONITOR_DISCORD_WEBHOOK'),
         'history_key' => 'composer-monitor:alerts',

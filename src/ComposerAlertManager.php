@@ -52,7 +52,7 @@ class ComposerAlertManager
                 continue;
             }
 
-            Cache::forever($key, true);
+            $dedupeTtl = (int) ($rules['dedupe_ttl'] ?? 86400);\n            $dedupeTtl > 0 ? Cache::put($key, true, $dedupeTtl) : Cache::forever($key, true);
             $alert['id'] = $fingerprint;
             $alert['created_at'] = now()->toIso8601String();
             $fresh[] = $alert;
@@ -91,7 +91,7 @@ class ComposerAlertManager
         }
 
         if (in_array('database', $channels, true)) {
-            foreach ((array) ($rules['users'] ?? []) as $user) {
+            $users = (array) ($rules['users'] ?? []);\n            $model = $rules['user_model'] ?? config('auth.providers.users.model');\n            $userIds = (array) ($rules['user_ids'] ?? []);\n\n            if ($userIds !== [] && is_string($model) && is_subclass_of($model, Model::class)) {\n                $users = array_merge($users, $model::query()->whereKey($userIds)->get()->all());\n            }\n\n            foreach ($users as $user) {
                 if (is_object($user) && method_exists($user, 'notify')) {
                     try {
                         $user->notify(new ComposerAlertNotification($alert));
