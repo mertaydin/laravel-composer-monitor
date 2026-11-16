@@ -16,15 +16,20 @@ class ComposerMonitorServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'composer-monitor');
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'composer-monitor');
+        $viewPath = dirname(__DIR__).'/resources/views';
+        $this->loadViewsFrom($viewPath, 'composer-monitor');
+        $this->loadTranslationsFrom(dirname(__DIR__).'/lang', 'composer-monitor');
 
         $this->publishes([
-            __DIR__.'/../config/composer-monitor.php' => config_path('composer-monitor.php'),
+            dirname(__DIR__).'/config/composer-monitor.php' => config_path('composer-monitor.php'),
         ], 'composer-monitor-config');
 
+        $this->publishes([
+            $viewPath => resource_path('views/vendor/composer-monitor'),
+        ], 'composer-monitor-views');
+
         if (config('composer-monitor.route.enabled', true)) {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            $this->loadRoutesFrom(dirname(__DIR__).'/routes/web.php');
         }
 
         if ($this->app->runningInConsole()) {
