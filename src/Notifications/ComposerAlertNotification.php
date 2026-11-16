@@ -3,6 +3,7 @@
 namespace MertAydin\ComposerMonitor\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -14,10 +15,7 @@ class ComposerAlertNotification extends Notification
 
     public function via(object $notifiable): array
     {
-        return array_values(array_intersect(
-            (array) config('composer-monitor.alerts.channels', ['mail', 'database']),
-            ['mail', 'database']
-        ));
+        return [$notifiable instanceof AnonymousNotifiable ? 'mail' : 'database'];
     }
 
     public function toMail(object $notifiable): MailMessage
