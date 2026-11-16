@@ -18,6 +18,7 @@ A lightweight Laravel dashboard for monitoring Composer dependency health. Revie
 - **Six dashboard languages:** Turkish, English, Arabic, Spanish, Hindi and Simplified Chinese.
 - **Appearance preferences:** light, dark and system themes.
 - **Dependency alerts:** configurable update thresholds and watched packages, with dashboard, email, database notification, Slack and Discord delivery.
+- **Dashboard access control:** authentication is required by default, with an optional callback for application-specific authorization.
 - **Configurable runtime:** choose the Composer executable, timeout, cache and route middleware.
 - **Laravel package discovery:** automatically registers its service provider.
 
@@ -78,6 +79,22 @@ The dashboard includes six languages: Türkçe, English, العربية, Españo
 | `cache.ttl` | `null` | Cache lifetime; null keeps the latest result |
 
 ## Access control
+
+The dashboard uses the `web` and `auth` middleware by default. You can customize the middleware in `config/composer-monitor.php`. For additional application-specific authorization, register a callback using the facade in a service provider:
+
+```php
+use Illuminate\\Http\\Request;
+use MertAydin\\ComposerMonitor\\Facades\\ComposerMonitor;
+
+public function boot(): void
+{
+    ComposerMonitor::auth(fn (Request $request): bool =>
+        $request->user()?->hasRole('SuperAdmin') ?? false
+    );
+}
+```
+
+The callback receives the current request. Return `true` to allow access or `false` to respond with HTTP 403. The callback is optional; the configured route middleware still applies.
 
 The dashboard exposes dependency and security information. Restrict access to trusted users by configuring middleware in `config/composer-monitor.php`:
 

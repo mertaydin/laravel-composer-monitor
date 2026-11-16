@@ -12,6 +12,9 @@ class RoutesTest extends TestCase
         $this->assertTrue(app('router')->has('composer-monitor.index'));
         $this->assertTrue(app('router')->has('composer-monitor.check'));
         $this->assertTrue(app('router')->has('composer-monitor.preferences'));
+
+        $middleware = app('router')->getRoutes()->getByName('composer-monitor.index')->gatherMiddleware();
+        $this->assertContains('auth', $middleware);
     }
 
     public function test_dashboard_views_are_registered(): void

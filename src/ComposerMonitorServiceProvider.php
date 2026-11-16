@@ -4,6 +4,7 @@ namespace MertAydin\ComposerMonitor;
 
 use Illuminate\Support\ServiceProvider;
 use MertAydin\ComposerMonitor\Console\CheckComposerCommand;
+use MertAydin\ComposerMonitor\Services\DashboardAuthorizer;
 
 class ComposerMonitorServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,7 @@ class ComposerMonitorServiceProvider extends ServiceProvider
 
         $this->app->singleton(ComposerMonitor::class);
         $this->app->singleton(ComposerAlertManager::class);
+        $this->app->singleton(DashboardAuthorizer::class);
     }
 
     public function boot(): void

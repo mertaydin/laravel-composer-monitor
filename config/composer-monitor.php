@@ -5,7 +5,7 @@ return [
         'enabled' => true,
         'prefix' => 'composer-monitor',
         'name' => 'composer-monitor.',
-        'middleware' => ['web'],
+        'middleware' => ['web', 'auth'],
     ],
     'layout' => null,
     'composer_binary' => env('COMPOSER_BINARY', 'composer'),
