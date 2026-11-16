@@ -7,10 +7,8 @@ use MertAydin\ComposerMonitor\ComposerMonitor;
 
 class ComposerMonitorController extends Controller
 {
-    public function __construct(protected ComposerMonitor $monitor)
-    {
-    }
-
+    public function __construct(protected ComposerMonitor $monitor) {}
+    
     public function index()
     {
         $packages = $this->monitor->packages();
