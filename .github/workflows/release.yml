@@ -21,11 +21,12 @@ jobs:
         shell: bash
         run: |
           COMMIT_MESSAGE="$(git log -1 --format=%s)"
-          if [[ "$COMMIT_MESSAGE" != "Release v0.1.0" ]]; then
+          if [[ ! "$COMMIT_MESSAGE" =~ ^Release\ v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "version=v0.1.0" >> "$GITHUB_OUTPUT"
+          VERSION="${COMMIT_MESSAGE#Release }"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Create GitHub release and tag
         if: steps.release.outputs.skip != 'true'
         env:
