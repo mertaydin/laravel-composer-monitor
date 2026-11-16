@@ -1,4 +1,5 @@
 name: Release
+# Publishes version tags from explicitly named release commits.
 
 on:
   push:
