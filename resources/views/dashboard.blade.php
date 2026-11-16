@@ -28,22 +28,3 @@
 <section class="panel"><div class="panel-head"><h2>{{ __('composer-monitor::messages.all_packages') }} <span class="count">{{ count($packages) }}</span></h2><input id="package-search" class="search" type="search" placeholder="{{ __('composer-monitor::messages.search') }}" autocomplete="off"></div><div class="table-wrap"><table id="packages-table"><thead><tr><th>{{ __('composer-monitor::messages.package') }}</th><th>{{ __('composer-monitor::messages.installed') }}</th><th>{{ __('composer-monitor::messages.type') }}</th><th>{{ __('composer-monitor::messages.description') }}</th></tr></thead><tbody>
 @forelse($packages as $package)<tr><td class="pkg">@if($package['url'])<a class="link" href="{{ $package['url'] }}" target="_blank" rel="noopener">{{ $package['name'] }}</a>@else{{ $package['name'] }}@endif</td><td class="version">{{ $package['version'] }}</td><td><span class="pill">{{ $package['direct']?__('composer-monitor::messages.direct'):__('composer-monitor::messages.transitive') }}</span> <span class="muted">{{ $package['dev']?__('composer-monitor::messages.development'):__('composer-monitor::messages.production') }}</span></td><td class="desc">{{ $package['description'] }}</td></tr>@empty<tr><td colspan="4" class="empty">{{ __('composer-monitor::messages.no_packages') }}</td></tr>@endforelse
 </tbody></table></div></section>
-
-<script>
-(function(){
- const root=document.documentElement;
- let theme=localStorage.getItem('composer-monitor-theme')||'system';
- function applyTheme(){
-   const selected=theme==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):theme;
-   root.dataset.theme=selected;
-   const select=document.getElementById('theme-select');
-   if(select) select.value=theme;
- }
- window.setComposerTheme=function(value){theme=value;localStorage.setItem('composer-monitor-theme',theme);applyTheme();};
- applyTheme();
- document.getElementById('package-search')?.addEventListener('input',function(){
-   const query=this.value.toLocaleLowerCase();
-   document.querySelectorAll('#packages-table tbody tr').forEach(row=>row.hidden=!row.textContent.toLocaleLowerCase().includes(query));
- });
-})();
-</script>
