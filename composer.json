@@ -1,6 +1,18 @@
 {
   "name": "mertaydin/laravel-composer-monitor",
-  "description": "A clean Composer dependency, update and security monitor for Laravel applications.",
+  "description": "A Laravel dashboard for Composer dependency health, outdated packages, security advisories and abandoned dependencies.",
+  "keywords": [
+    "laravel",
+    "composer",
+    "php",
+    "dependency-monitoring",
+    "dependency-management",
+    "security",
+    "audit",
+    "outdated-packages",
+    "composer-audit",
+    "dashboard"
+  ],
   "type": "library",
   "license": "MIT",
   "require": {
