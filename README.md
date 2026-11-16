@@ -15,6 +15,9 @@ A lightweight Laravel dashboard for monitoring Composer dependency health. Revie
 - **Abandoned packages:** identify packages marked as abandoned and suggested replacements.
 - **Update blockers:** inspect dependency constraints that prevent an update.
 - **Dashboard and Artisan command:** run checks from the web interface or CLI.
+- **Six dashboard languages:** Turkish, English, Arabic, Spanish, Hindi and Simplified Chinese.
+- **Appearance preferences:** light, dark and system themes.
+- **Dependency alerts:** configurable update thresholds and watched packages, with dashboard, email, database notification, Slack and Discord delivery.
 - **Configurable runtime:** choose the Composer executable, timeout, cache and route middleware.
 - **Laravel package discovery:** automatically registers its service provider.
 
@@ -53,6 +56,10 @@ php artisan composer-monitor:check
 ```
 
 The monitor reads your application's `composer.json` and `composer.lock`, then runs Composer's locked audit and outdated checks. It does not install, update or modify your dependencies.
+
+## Language and appearance
+
+The dashboard includes six languages: Türkçe, English, العربية, Español, हिन्दी and 简体中文. Select a language from the dashboard header; the preference is stored in the current session. The appearance selector supports light, dark and system themes.
 
 ## Configuration
 

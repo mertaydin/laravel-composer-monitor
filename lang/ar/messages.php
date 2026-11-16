@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'مراقبة Composer', 'subtitle' => 'تابع حالة الاعتماديات من مكان واحد.',
+    'check_now' => 'تحقق الآن', 'last_checked' => 'آخر تحقق', 'never' => 'لم يتم التحقق بعد',
+    'packages' => 'الحزم المثبتة', 'outdated' => 'تحديثات متاحة', 'vulnerable' => 'تنبيهات أمنية',
+    'abandoned' => 'حزم مهجورة', 'updates_title' => 'التحديثات المتاحة', 'security_title' => 'التنبيهات الأمنية',
+    'abandoned_title' => 'الحزم المهجورة', 'all_packages' => 'كل الاعتماديات', 'search' => 'ابحث عن الحزم...',
+    'package' => 'الحزمة', 'installed' => 'الإصدار المثبت', 'latest' => 'أحدث إصدار', 'release_date' => 'تاريخ الإصدار',
+    'type' => 'النوع', 'direct' => 'مباشرة', 'transitive' => 'غير مباشرة', 'development' => 'تطوير',
+    'production' => 'إنتاج', 'description' => 'الوصف', 'severity' => 'الخطورة', 'affected' => 'الإصدارات المتأثرة',
+    'reported' => 'تاريخ الإبلاغ', 'replacement' => 'البديل المقترح', 'no_updates' => 'جميع الاعتماديات محدثة.',
+    'no_advisories' => 'لم يتم العثور على تنبيهات أمنية.', 'no_abandoned' => 'لم يتم العثور على حزم مهجورة.',
+    'no_packages' => 'لم يتم العثور على حزم.', 'check_complete' => 'اكتمل فحص Composer.',
+    'check_failed' => 'فشل فحص Composer: :message', 'security_advisory' => 'تنبيه أمني',
+    'error_title' => 'تعذر تحديث نتيجة الفحص السابقة', 'open_package' => 'تفاصيل الحزمة',
+    'filter_all' => 'الكل', 'filter_direct' => 'مباشرة', 'filter_dev' => 'تطوير',
+    'language' => 'اللغة', 'theme' => 'المظهر', 'light' => 'فاتح', 'dark' => 'داكن', 'system' => 'النظام',
+    'alerts_title' => 'تنبيهات الاعتماديات', 'alerts_empty' => 'لم يتم إنشاء أي تنبيهات بعد.',
+    'alert_threshold_title' => 'تم بلوغ حد التحديثات',
+    'alert_threshold_message' => 'تتوفر تحديثات لـ :count حزم (الحد: :threshold).',
+    'alert_package_title' => 'تحديث متاح: :package',
+    'alert_package_message' => 'يتوفر إصدار جديد للحزمة :package: :version.',
+    'unknown_version' => 'إصدار غير معروف',
+];

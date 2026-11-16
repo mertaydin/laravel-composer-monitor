@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Composer Monitor', 'subtitle' => 'Supervisa el estado de tus dependencias en un solo lugar.',
+    'check_now' => 'Comprobar ahora', 'last_checked' => 'Última comprobación', 'never' => 'Aún no se ha comprobado',
+    'packages' => 'Paquetes instalados', 'outdated' => 'Actualizaciones disponibles', 'vulnerable' => 'Avisos de seguridad',
+    'abandoned' => 'Paquetes abandonados', 'updates_title' => 'Actualizaciones pendientes', 'security_title' => 'Avisos de seguridad',
+    'abandoned_title' => 'Paquetes abandonados', 'all_packages' => 'Todas las dependencias', 'search' => 'Buscar paquetes...',
+    'package' => 'Paquete', 'installed' => 'Versión instalada', 'latest' => 'Última versión', 'release_date' => 'Fecha de publicación',
+    'type' => 'Tipo', 'direct' => 'Directa', 'transitive' => 'Transitiva', 'development' => 'Desarrollo',
+    'production' => 'Producción', 'description' => 'Descripción', 'severity' => 'Gravedad', 'affected' => 'Versiones afectadas',
+    'reported' => 'Fecha del aviso', 'replacement' => 'Alternativa sugerida', 'no_updates' => 'Todas las dependencias están actualizadas.',
+    'no_advisories' => 'No se encontraron avisos de seguridad.', 'no_abandoned' => 'No se encontraron paquetes abandonados.',
+    'no_packages' => 'No se encontraron paquetes.', 'check_complete' => 'Comprobación de Composer completada.',
+    'check_failed' => 'La comprobación de Composer falló: :message', 'security_advisory' => 'Aviso de seguridad',
+    'error_title' => 'No se pudo actualizar la comprobación anterior', 'open_package' => 'Detalles del paquete',
+    'filter_all' => 'Todos', 'filter_direct' => 'Directas', 'filter_dev' => 'Desarrollo',
+    'language' => 'Idioma', 'theme' => 'Apariencia', 'light' => 'Claro', 'dark' => 'Oscuro', 'system' => 'Sistema',
+    'alerts_title' => 'Alertas de dependencias', 'alerts_empty' => 'Todavía no se han generado alertas.',
+    'alert_threshold_title' => 'Se alcanzó el umbral de actualizaciones',
+    'alert_threshold_message' => ':count paquetes tienen actualizaciones disponibles (umbral: :threshold).',
+    'alert_package_title' => 'Actualización disponible: :package',
+    'alert_package_message' => ':package tiene una nueva versión disponible: :version.',
+    'unknown_version' => 'versión desconocida',
+];

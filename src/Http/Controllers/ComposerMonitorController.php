@@ -8,6 +8,8 @@ use MertAydin\ComposerMonitor\ComposerMonitor;
 
 class ComposerMonitorController extends Controller
 {
+    private const SUPPORTED_LOCALES = ['tr', 'en', 'ar', 'es', 'hi', 'zh_CN'];
+
     public function index(ComposerMonitor $monitor)
     {
         if (session()->has('composer-monitor.locale')) {
@@ -39,7 +41,10 @@ class ComposerMonitorController extends Controller
 
     public function preferences(Request $request)
     {
-        $locale = $request->validate(['locale' => 'required|string|in:tr,en'])['locale'];
+        $locale = $request->validate([
+            'locale' => ['required', 'string', 'in:'.implode(',', self::SUPPORTED_LOCALES)],
+        ])['locale'];
+
         session(['composer-monitor.locale' => $locale]);
         app()->setLocale($locale);
 

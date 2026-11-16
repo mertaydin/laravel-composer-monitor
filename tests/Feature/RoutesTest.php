@@ -39,6 +39,23 @@ class RoutesTest extends TestCase
         $this->assertStringContainsString('Dependency alerts', $html);
     }
 
+    public function test_dashboard_offers_all_six_languages(): void
+    {
+        $html = view('composer-monitor::dashboard', [
+            'packages' => [],
+            'latest' => [],
+            'outdated' => [],
+            'advisories' => [],
+            'abandoned' => [],
+            'alerts' => [],
+        ])->render();
+
+        foreach (['tr', 'en', 'ar', 'es', 'hi', 'zh_CN'] as $locale) {
+            $this->assertStringContainsString('value="'.$locale.'"', $html);
+            $this->assertFileExists(dirname(__DIR__, 2).'/lang/'.$locale.'/messages.php');
+        }
+    }
+
     public function test_alert_manager_rearms_after_the_condition_clears(): void
     {
         config([

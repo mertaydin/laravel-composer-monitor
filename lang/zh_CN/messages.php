@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Composer 监控', 'subtitle' => '在一个页面中查看依赖项状态。',
+    'check_now' => '立即检查', 'last_checked' => '上次检查', 'never' => '尚未检查',
+    'packages' => '已安装的软件包', 'outdated' => '有可用更新', 'vulnerable' => '安全警告',
+    'abandoned' => '已弃用的软件包', 'updates_title' => '待更新项目', 'security_title' => '安全公告',
+    'abandoned_title' => '已弃用的软件包', 'all_packages' => '所有依赖项', 'search' => '搜索软件包...',
+    'package' => '软件包', 'installed' => '已安装版本', 'latest' => '最新版本', 'release_date' => '发布日期',
+    'type' => '类型', 'direct' => '直接依赖', 'transitive' => '间接依赖', 'development' => '开发环境',
+    'production' => '生产环境', 'description' => '描述', 'severity' => '严重程度', 'affected' => '受影响版本',
+    'reported' => '报告日期', 'replacement' => '建议替代项', 'no_updates' => '所有依赖项均为最新版本。',
+    'no_advisories' => '未发现安全公告。', 'no_abandoned' => '未发现已弃用的软件包。',
+    'no_packages' => '未找到软件包。', 'check_complete' => 'Composer 检查已完成。',
+    'check_failed' => 'Composer 检查失败：:message', 'security_advisory' => '安全公告',
+    'error_title' => '无法刷新上一次检查结果', 'open_package' => '软件包详情',
+    'filter_all' => '全部', 'filter_direct' => '直接依赖', 'filter_dev' => '开发环境',
+    'language' => '语言', 'theme' => '外观', 'light' => '浅色', 'dark' => '深色', 'system' => '跟随系统',
+    'alerts_title' => '依赖项警报', 'alerts_empty' => '尚未生成任何警报。',
+    'alert_threshold_title' => '已达到更新数量阈值',
+    'alert_threshold_message' => ':count 个软件包有可用更新（阈值：:threshold）。',
+    'alert_package_title' => '有可用更新：:package',
+    'alert_package_message' => ':package 有新版本可用：:version。',
+    'unknown_version' => '未知版本',
+];

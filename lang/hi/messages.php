@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Composer मॉनिटर', 'subtitle' => 'अपनी निर्भरताओं की स्थिति एक ही जगह देखें।',
+    'check_now' => 'अभी जांचें', 'last_checked' => 'अंतिम जांच', 'never' => 'अभी तक जांच नहीं हुई',
+    'packages' => 'इंस्टॉल किए गए पैकेज', 'outdated' => 'अपडेट उपलब्ध', 'vulnerable' => 'सुरक्षा चेतावनियां',
+    'abandoned' => 'छोड़े गए पैकेज', 'updates_title' => 'लंबित अपडेट', 'security_title' => 'सुरक्षा सलाह',
+    'abandoned_title' => 'छोड़े गए पैकेज', 'all_packages' => 'सभी निर्भरताएं', 'search' => 'पैकेज खोजें...',
+    'package' => 'पैकेज', 'installed' => 'इंस्टॉल किया गया संस्करण', 'latest' => 'नवीनतम संस्करण', 'release_date' => 'रिलीज़ तारीख',
+    'type' => 'प्रकार', 'direct' => 'प्रत्यक्ष', 'transitive' => 'अप्रत्यक्ष', 'development' => 'विकास',
+    'production' => 'प्रोडक्शन', 'description' => 'विवरण', 'severity' => 'गंभीरता', 'affected' => 'प्रभावित संस्करण',
+    'reported' => 'रिपोर्ट की तारीख', 'replacement' => 'सुझाया गया विकल्प', 'no_updates' => 'सभी निर्भरताएं अपडेट हैं।',
+    'no_advisories' => 'कोई सुरक्षा सलाह नहीं मिली।', 'no_abandoned' => 'कोई छोड़ा गया पैकेज नहीं मिला।',
+    'no_packages' => 'कोई पैकेज नहीं मिला।', 'check_complete' => 'Composer जांच पूरी हुई।',
+    'check_failed' => 'Composer जांच विफल हुई: :message', 'security_advisory' => 'सुरक्षा सलाह',
+    'error_title' => 'पिछली जांच को रीफ़्रेश नहीं किया जा सका', 'open_package' => 'पैकेज विवरण',
+    'filter_all' => 'सभी', 'filter_direct' => 'प्रत्यक्ष', 'filter_dev' => 'विकास',
+    'language' => 'भाषा', 'theme' => 'दिखावट', 'light' => 'लाइट', 'dark' => 'डार्क', 'system' => 'सिस्टम',
+    'alerts_title' => 'निर्भरता अलर्ट', 'alerts_empty' => 'अभी तक कोई अलर्ट नहीं बनाया गया।',
+    'alert_threshold_title' => 'अपडेट सीमा पूरी हुई',
+    'alert_threshold_message' => ':count पैकेज के अपडेट उपलब्ध हैं (सीमा: :threshold)।',
+    'alert_package_title' => 'अपडेट उपलब्ध: :package',
+    'alert_package_message' => ':package का नया संस्करण उपलब्ध है: :version।',
+    'unknown_version' => 'अज्ञात संस्करण',
+];
