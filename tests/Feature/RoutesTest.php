@@ -39,7 +39,7 @@ class RoutesTest extends TestCase
         $this->assertStringContainsString('Dependency alerts', $html);
     }
 
-    public function test_alert_manager_deduplicates_repeated_alerts(): void
+    public function test_alert_manager_rearms_after_the_condition_clears(): void
     {
         config([
             'composer-monitor.alerts.enabled' => true,
@@ -52,6 +52,8 @@ class RoutesTest extends TestCase
         $manager = app(ComposerAlertManager::class);
 
         $this->assertCount(1, $manager->evaluate($result));
-        $this->assertCount(0, $manager->evaluate($result));\n\n        $this->assertCount(0, $manager->evaluate(['outdated' => []]));\n        $this->assertCount(1, $manager->evaluate($result));
+        $this->assertCount(0, $manager->evaluate($result));
+        $this->assertCount(0, $manager->evaluate(['outdated' => []]));
+        $this->assertCount(1, $manager->evaluate($result));
     }
 }
