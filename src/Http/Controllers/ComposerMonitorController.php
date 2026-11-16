@@ -1,9 +1,9 @@
 <?php
 
-namespace MertAydin\\ComposerMonitor\\Http\\Controllers;
+namespace MertAydin\ComposerMonitor\Http\Controllers;
 
-use Illuminate\\Routing\\Controller;
-use MertAydin\\ComposerMonitor\\ComposerMonitor;
+use Illuminate\Routing\Controller;
+use MertAydin\ComposerMonitor\ComposerMonitor;
 
 class ComposerMonitorController extends Controller
 {

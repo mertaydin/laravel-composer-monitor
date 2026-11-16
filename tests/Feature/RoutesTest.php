@@ -1,8 +1,8 @@
 <?php
 
-namespace MertAydin\\ComposerMonitor\\Tests\\Feature;
+namespace MertAydin\ComposerMonitor\Tests\Feature;
 
-use MertAydin\\ComposerMonitor\\Tests\\TestCase;
+use MertAydin\ComposerMonitor\Tests\TestCase;
 
 class RoutesTest extends TestCase
 {
