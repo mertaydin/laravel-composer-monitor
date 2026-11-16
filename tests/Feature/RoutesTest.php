@@ -52,6 +52,6 @@ class RoutesTest extends TestCase
         $manager = app(ComposerAlertManager::class);
 
         $this->assertCount(1, $manager->evaluate($result));
-        $this->assertCount(0, $manager->evaluate($result));
+        $this->assertCount(0, $manager->evaluate($result));\n\n        $this->assertCount(0, $manager->evaluate(['outdated' => []]));\n        $this->assertCount(1, $manager->evaluate($result));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace MertAydin\ComposerMonitor;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Notification;
@@ -13,6 +14,7 @@ class ComposerAlertManager
     public function evaluate(array $result): array
     {
         $rules = config('composer-monitor.alerts', []);
+
         if (! ($rules['enabled'] ?? false) || isset($result['error'])) {
             return [];
         }
@@ -44,26 +46,37 @@ class ComposerAlertManager
             }
         }
 
+        $activeKey = 'composer-monitor:alerts:active';
+        $previousActive = Cache::get($activeKey, []);
+        $currentActive = [];
         $fresh = [];
+
         foreach ($alerts as $alert) {
-            $fingerprint = sha1(($alert['type'] ?? '').'|'.($alert['package'] ?? '').'|'.($alert['message'] ?? ''));
-            $key = 'composer-monitor:alert-sent:'.$fingerprint;
-            if (Cache::has($key)) {
+            $identity = $alert['type'].'|'.($alert['package'] ?? 'global');
+            $fingerprint = sha1($identity.'|'.$alert['message']);
+            $currentActive[$identity] = $fingerprint;
+
+            if (($previousActive[$identity] ?? null) === $fingerprint) {
                 continue;
             }
 
-            Cache::forever($key, true);
             $alert['id'] = $fingerprint;
             $alert['created_at'] = now()->toIso8601String();
             $fresh[] = $alert;
         }
 
+        Cache::forever($activeKey, $currentActive);
+
         if ($fresh === []) {
             return [];
         }
 
-        $historyKey = $rules['history_key'] ?? 'composer-monitor:alerts';
-        Cache::forever($historyKey, array_slice(array_merge($fresh, Cache::get($historyKey, [])), 0, 50));
+        $channels = (array) ($rules['channels'] ?? ['dashboard']);
+
+        if (in_array('dashboard', $channels, true)) {
+            $historyKey = $rules['history_key'] ?? 'composer-monitor:alerts';
+            Cache::forever($historyKey, array_slice(array_merge($fresh, Cache::get($historyKey, [])), 0, 50));
+        }
 
         foreach ($fresh as $alert) {
             $this->send($alert, $rules);
@@ -91,7 +104,15 @@ class ComposerAlertManager
         }
 
         if (in_array('database', $channels, true)) {
-            foreach ((array) ($rules['users'] ?? []) as $user) {
+            $users = (array) ($rules['users'] ?? []);
+            $model = $rules['user_model'] ?? config('auth.providers.users.model');
+            $userIds = (array) ($rules['user_ids'] ?? []);
+
+            if ($userIds !== [] && is_string($model) && is_subclass_of($model, Model::class)) {
+                $users = array_merge($users, $model::query()->whereKey($userIds)->get()->all());
+            }
+
+            foreach ($users as $user) {
                 if (is_object($user) && method_exists($user, 'notify')) {
                     try {
                         $user->notify(new ComposerAlertNotification($alert));
@@ -104,7 +125,7 @@ class ComposerAlertManager
 
         if (in_array('slack', $channels, true) && filled($rules['slack_webhook'] ?? null)) {
             try {
-                Http::timeout(10)->post($rules['slack_webhook'], ['text' => '*'.$alert['title']."*\n".$alert['message']])->throw();
+                Http::timeout(10)->post($rules['slack_webhook'], ['text' => '*'.$alert['title'].'*'.PHP_EOL.$alert['message']])->throw();
             } catch (Throwable $exception) {
                 report($exception);
             }
@@ -112,7 +133,7 @@ class ComposerAlertManager
 
         if (in_array('discord', $channels, true) && filled($rules['discord_webhook'] ?? null)) {
             try {
-                Http::timeout(10)->post($rules['discord_webhook'], ['content' => '**'.$alert['title']."**\n".$alert['message']])->throw();
+                Http::timeout(10)->post($rules['discord_webhook'], ['content' => '**'.$alert['title'].'**'.PHP_EOL.$alert['message']])->throw();
             } catch (Throwable $exception) {
                 report($exception);
             }
