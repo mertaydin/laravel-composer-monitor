@@ -5,73 +5,74 @@
 [![License](https://img.shields.io/packagist/l/mertaydin/laravel-composer-monitor.svg?style=flat-square)](LICENSE)
 [![Tests](https://img.shields.io/github/actions/workflow/status/mertaydin/laravel-composer-monitor/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mertaydin/laravel-composer-monitor/actions)
 
-A lightweight Laravel dashboard for monitoring Composer dependency health: installed packages, available updates, security advisories, abandoned dependencies and update blockers.
+A lightweight Laravel dashboard for monitoring Composer dependency health. Review installed packages, available updates, security advisories, abandoned dependencies and the constraints blocking updates — all from one place.
 
 ## Features
 
-- Dependency inventory with direct/transitive and production/development classification.
-- Outdated packages, security advisories, abandoned dependencies and update blockers.
-- Turkish and English interface language selector.
-- Light, dark and system appearance modes.
-- Configurable alert rules: outdated-package count threshold and selected package updates.
-- Alert delivery to dashboard history, email, Laravel database notifications, Slack and Discord.
-- Artisan command and dashboard-triggered checks. Checks never install or modify dependencies.
+- **Dependency inventory:** browse installed production and development packages, versions and direct/transitive status.
+- **Outdated packages:** identify dependencies with newer releases available.
+- **Security monitoring:** review Composer security audit advisories and affected versions.
+- **Abandoned packages:** identify packages marked as abandoned and suggested replacements.
+- **Update blockers:** inspect dependency constraints that prevent an update.
+- **Dashboard and Artisan command:** run checks from the web interface or CLI.
+- **Configurable runtime:** choose the Composer executable, timeout, cache and route middleware.
+- **Laravel package discovery:** automatically registers its service provider.
 
 ## Requirements
 
-- PHP 8.2+
+- PHP 8.2 or newer
 - Laravel 10, 11, 12 or 13
 - Composer 2
 
 ## Installation
 
+Install the package with Composer:
+
 ```bash
 composer require mertaydin/laravel-composer-monitor
+```
+
+The dashboard is available at:
+
+```text
+/composer-monitor
+```
+
+Publish the configuration file to customize the package:
+
+```bash
 php artisan vendor:publish --tag=composer-monitor-config
 ```
 
-Dashboard: `/composer-monitor`
+## Usage
 
-Run a check:
+Run a dependency check from the dashboard or with Artisan:
 
 ```bash
 php artisan composer-monitor:check
 ```
 
-## Alert configuration
+The monitor reads your application's `composer.json` and `composer.lock`, then runs Composer's locked audit and outdated checks. It does not install, update or modify your dependencies.
 
-Configure `config/composer-monitor.php`:
+## Configuration
 
-```php
-'alerts' => [
-    'enabled' => true,
-    'outdated_threshold' => 5,
-    'packages' => [
-        'laravel/framework',
-        'guzzlehttp/guzzle',
-    ],
-    'channels' => ['dashboard', 'mail', 'database', 'slack', 'discord'],
-    'mail_to' => ['ops@example.com'],
-    'slack_webhook' => env('COMPOSER_MONITOR_SLACK_WEBHOOK'),
-    'discord_webhook' => env('COMPOSER_MONITOR_DISCORD_WEBHOOK'),
-    'user_ids' => [1, 2],
-    'user_model' => App\\Models\\User::class,
-    'dedupe_ttl' => 86400,
-],
-```
+| Key | Default | Description |
+| --- | --- | --- |
+| `route.enabled` | `true` | Register the dashboard routes |
+| `route.prefix` | `composer-monitor` | Dashboard URL prefix |
+| `route.name` | `composer-monitor.` | Route name prefix |
+| `route.middleware` | `['web']` | Middleware applied to dashboard routes |
+| `layout` | `null` | Optional Blade layout to extend |
+| `composer_binary` | `composer` | Composer executable path |
+| `timeout` | `120` | Composer process timeout in seconds |
+| `blocker_limit` | `30` | Maximum outdated packages checked for update blockers |
+| `cache.store` | Default | Optional Laravel cache store |
+| `cache.key` | `composer-monitor:latest` | Cache key |
+| `cache.ttl` | `null` | Cache lifetime; null keeps the latest result |
 
-The threshold rule fires when the number of outdated dependencies reaches the configured value. Package rules alert when a watched package appears in Composer's outdated report. Alert fingerprints are cached to avoid sending the same update repeatedly; `dedupe_ttl` controls the suppression window in seconds.
+## Access control
 
-- Email uses Laravel's configured mail transport. Set `mail_to` to one or more recipient addresses.
-- Database notifications use Laravel's Notification system. Set `user_ids` and optionally `user_model` (which defaults to the configured auth user model). The model must use Laravel's `Notifiable` trait, and the application must have the notifications table.
-- Slack and Discord use their respective incoming webhook URLs.
-- Dashboard alerts are retained in the latest 50 alert history entries.
-
-Set `COMPOSER_MONITOR_ALERTS_ENABLED=true`, `COMPOSER_MONITOR_ALERT_OUTDATED_THRESHOLD=5`, `COMPOSER_MONITOR_ALERT_MAIL_TO=ops@example.com`, `COMPOSER_MONITOR_SLACK_WEBHOOK` and `COMPOSER_MONITOR_DISCORD_WEBHOOK` as needed. Watched package names and channel recipients are configured in the published PHP config.
-
-## Routes and access control
-
-The default dashboard route is `/composer-monitor`. Restrict it in the published config:
+The dashboard exposes dependency and security information. Restrict access to trusted users by configuring middleware in `config/composer-monitor.php`:
 
 ```php
 'route' => [
@@ -79,6 +80,8 @@ The default dashboard route is `/composer-monitor`. Restrict it in the published
 ],
 ```
 
+For production applications, do not expose the dashboard publicly.
+
 ## License
 
-MIT
+This package is open-sourced software licensed under the [MIT license](LICENSE).
