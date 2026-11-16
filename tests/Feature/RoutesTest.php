@@ -1,8 +1,8 @@
 <?php
 
-namespace MertAydin\ComposerMonitor\Tests\Feature;
+namespace MertAydin\\ComposerMonitor\\Tests\\Feature;
 
-use MertAydin\ComposerMonitor\Tests\TestCase;
+use MertAydin\\ComposerMonitor\\Tests\\TestCase;
 
 class RoutesTest extends TestCase
 {
@@ -17,5 +17,22 @@ class RoutesTest extends TestCase
         $this->assertTrue(app('view')->exists('composer-monitor::index'));
         $this->assertTrue(app('view')->exists('composer-monitor::dashboard'));
         $this->assertTrue(app('view')->exists('composer-monitor::standalone'));
+        $this->assertTrue(app('view')->exists('composer-monitor::embedded'));
+    }
+
+    public function test_dashboard_renders_without_a_custom_layout(): void
+    {
+        config(['composer-monitor.layout' => null]);
+
+        $html = view('composer-monitor::index', [
+            'packages' => [],
+            'latest' => [],
+            'outdated' => [],
+            'advisories' => [],
+            'abandoned' => [],
+        ])->render();
+
+        $this->assertStringContainsString('<!doctype html>', $html);
+        $this->assertStringContainsString('Composer Monitor', $html);
     }
 }

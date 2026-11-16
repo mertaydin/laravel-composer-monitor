@@ -1,9 +1,9 @@
 <?php
 
-namespace MertAydin\ComposerMonitor\Http\Controllers;
+namespace MertAydin\\ComposerMonitor\\Http\\Controllers;
 
-use Illuminate\Routing\Controller;
-use MertAydin\ComposerMonitor\ComposerMonitor;
+use Illuminate\\Routing\\Controller;
+use MertAydin\\ComposerMonitor\\ComposerMonitor;
 
 class ComposerMonitorController extends Controller
 {
@@ -15,7 +15,12 @@ class ComposerMonitorController extends Controller
         $advisories = $latest['advisories'] ?? [];
         $abandoned = $latest['abandoned'] ?? [];
 
-        return view('composer-monitor::index', compact(
+        $layout = config('composer-monitor.layout');
+        $view = is_string($layout) && trim($layout) !== ''
+            ? 'composer-monitor::embedded'
+            : 'composer-monitor::index';
+
+        return view($view, compact(
             'packages',
             'latest',
             'outdated',
