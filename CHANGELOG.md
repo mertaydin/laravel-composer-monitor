@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Replace the full-screen dependency-check overlay with a slim animated progress bar fixed to the top of the dashboard while preserving the existing POST/redirect flow.
+
 ## v0.1.20 - 2026-11-17
 
 - Added per-package Composer Show and Composer Why actions with modal output.
