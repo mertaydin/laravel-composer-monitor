@@ -19,7 +19,7 @@ A lightweight Laravel dashboard for monitoring Composer dependency health. Revie
 - **Appearance preferences:** light, dark and system themes.
 - **Dependency alerts:** configurable update thresholds and watched packages, with dashboard, email, database notification, Slack and Discord delivery.
 - **Dashboard access control:** authentication is required by default, with an optional callback for application-specific authorization.
-- **Configurable runtime:** choose the Composer executable, timeout, cache and route middleware.
+- **Configurable runtime:** choose the Composer executable, timeout and cache.
 - **Laravel package discovery:** automatically registers its service provider.
 
 ## Requirements
@@ -41,11 +41,10 @@ The dashboard is available at `/composer-monitor` by default. To place it under 
 ```php
 'route' => [
     'prefix' => 'panel/super/composer-monitor',
-    'middleware' => ['web', 'auth', 'super-admin', 'super-ip'],
 ],
 ```
 
-The dashboard will then be available at `/panel/super/composer-monitor`. Leading and trailing slashes are normalized automatically. Add your application's access-control middleware to `route.middleware` so it protects every package route:
+The dashboard will then be available at `/panel/super/composer-monitor`. Leading and trailing slashes are normalized automatically.
 
 Publish the configuration file to customize the package:
 
@@ -74,7 +73,6 @@ The dashboard includes six languages: Türkçe, English, العربية, Españo
 | `route.enabled` | `true` | Register the dashboard routes |
 | `route.prefix` | `composer-monitor` | Dashboard URL prefix; supports nested paths such as `panel/super/composer-monitor` |
 | `route.name` | `composer-monitor.` | Route name prefix |
-| `route.middleware` | `['web', 'auth']` | Middleware applied to dashboard routes; supports application middleware such as `super-admin` and `super-ip` |
 | `layout` | `null` | Optional Blade layout to extend |
 | `composer_binary` | `composer` | Composer executable path |
 | `timeout` | `120` | Composer process timeout in seconds |
@@ -85,7 +83,7 @@ The dashboard includes six languages: Türkçe, English, العربية, Españo
 
 ## Access control
 
-The dashboard uses the `web` and `auth` middleware by default. You can customize the middleware in `config/composer-monitor.php`. For additional application-specific authorization, register a callback using the facade in a service provider:
+The dashboard always uses the `web` and `auth` middleware. For additional application-specific authorization, register a callback using the facade in a service provider:
 
 ```php
 use Illuminate\\Http\\Request;
@@ -99,15 +97,7 @@ public function boot(): void
 }
 ```
 
-The callback receives the current request. Return `true` to allow access or `false` to respond with HTTP 403. The callback is optional; the configured route middleware still applies.
-
-The dashboard exposes dependency and security information. Restrict access to trusted users by configuring middleware in `config/composer-monitor.php`:
-
-```php
-'route' => [
-    'middleware' => ['web', 'auth'],
-],
-```
+The callback receives the current request. Return `true` to allow access or `false` to respond with HTTP 403. The callback is optional; the package's `web` and `auth` middleware always apply.
 
 For production applications, do not expose the dashboard publicly.
 

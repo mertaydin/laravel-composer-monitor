@@ -5,7 +5,6 @@ return [
         'enabled' => true,
         'prefix' => 'composer-monitor',
         'name' => 'composer-monitor.',
-        'middleware' => ['web', 'auth'],
     ],
     'authorization' => [
         'gate' => 'viewComposerMonitor',
