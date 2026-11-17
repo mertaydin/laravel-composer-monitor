@@ -114,3 +114,6 @@ For production applications, do not expose the dashboard publicly.
 ## License
 
 This package is open-sourced software licensed under the [MIT license](LICENSE).
+
+
+The dashboard is accessible to users who pass the configured route middleware when no authorization Gate is defined. If `viewComposerMonitor` is defined, Laravel enforces it on every dashboard route. Change the ability name with `authorization.gate`. The existing `ComposerMonitor::auth(...)` callback remains available as an additional authorization restriction.

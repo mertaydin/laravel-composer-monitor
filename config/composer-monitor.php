@@ -7,6 +7,9 @@ return [
         'name' => 'composer-monitor.',
         'middleware' => ['web', 'auth'],
     ],
+    'authorization' => [
+        'gate' => 'viewComposerMonitor',
+    ],
     'layout' => null,
     'composer_binary' => env('COMPOSER_BINARY', 'composer'),
     'timeout' => 120,
