@@ -51,6 +51,7 @@
             });
         });
 
+        initializeCheckLoading();
         initializeCommandModals();
 
         document.getElementById('package-search')?.addEventListener('input', function () {
@@ -58,6 +59,33 @@
             document.querySelectorAll('#packages-table tbody tr').forEach(function (row) {
                 row.hidden = !row.textContent.toLocaleLowerCase().includes(query);
             });
+        });
+    }
+
+    function initializeCheckLoading() {
+        const form = document.querySelector('[data-composer-monitor-check]');
+        const overlay = document.getElementById('composer-monitor-page-loading');
+        if (!form || !overlay) return;
+
+        form.addEventListener('submit', function (event) {
+            if (form.dataset.submitting === 'true') {
+                event.preventDefault();
+                return;
+            }
+
+            form.dataset.submitting = 'true';
+            const button = form.querySelector('button[type="submit"]');
+            if (button) button.disabled = true;
+            overlay.hidden = false;
+            overlay.setAttribute('aria-hidden', 'false');
+        });
+
+        window.addEventListener('pageshow', function () {
+            overlay.hidden = true;
+            overlay.setAttribute('aria-hidden', 'true');
+            form.dataset.submitting = 'false';
+            const button = form.querySelector('button[type="submit"]');
+            if (button) button.disabled = false;
         });
     }
 
