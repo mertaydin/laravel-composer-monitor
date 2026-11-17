@@ -5,7 +5,7 @@ use MertAydin\ComposerMonitor\Http\Controllers\ComposerMonitorController;
 use MertAydin\ComposerMonitor\Http\Middleware\AuthorizeDashboard;
 
 Route::group([
-    'prefix' => config('composer-monitor.route.prefix', 'composer-monitor'),
+    'prefix' => trim((string) config('composer-monitor.route.prefix', 'composer-monitor'), '/'),
     'as' => config('composer-monitor.route.name', 'composer-monitor.'),
     'middleware' => [...config('composer-monitor.route.middleware', ['web', 'auth']), AuthorizeDashboard::class],
 ], function () {

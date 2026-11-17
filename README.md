@@ -36,11 +36,15 @@ Install the package with Composer:
 composer require mertaydin/laravel-composer-monitor
 ```
 
-The dashboard is available at:
+The dashboard is available at `/composer-monitor` by default. To place it under an existing application panel path, update `route.prefix` in `config/composer-monitor.php`:
 
-```text
-/composer-monitor
+```php
+'route' => [
+    'prefix' => 'panel/super/composer-monitor',
+],
 ```
+
+The dashboard will then be available at `/panel/super/composer-monitor`. Leading and trailing slashes are normalized automatically.
 
 Publish the configuration file to customize the package:
 
@@ -67,7 +71,7 @@ The dashboard includes six languages: Türkçe, English, العربية, Españo
 | Key | Default | Description |
 | --- | --- | --- |
 | `route.enabled` | `true` | Register the dashboard routes |
-| `route.prefix` | `composer-monitor` | Dashboard URL prefix |
+| `route.prefix` | `composer-monitor` | Dashboard URL prefix; supports nested paths such as `panel/super/composer-monitor` |
 | `route.name` | `composer-monitor.` | Route name prefix |
 | `route.middleware` | `['web']` | Middleware applied to dashboard routes |
 | `layout` | `null` | Optional Blade layout to extend |
