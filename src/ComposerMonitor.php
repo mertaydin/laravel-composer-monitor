@@ -178,6 +178,40 @@ class ComposerMonitor
         return $result;
     }
 
+    public function showPackage(string $name): array
+    {
+        $this->assertInstalledPackage($name);
+        $output = $this->run('show', $name, '--format=json');
+
+        return ['output' => $output, 'data' => $this->decode($output)];
+    }
+
+    public function whyPackage(string $name): array
+    {
+        $this->assertInstalledPackage($name);
+
+        return ['output' => $this->run('why', $name, '--tree', '--locked')];
+    }
+
+    public function auditReport(): array
+    {
+        $output = $this->run('audit', '--locked', '--format=json');
+
+        return ['output' => $output, 'data' => $this->decode($output)];
+    }
+
+    public function suggestions(): array
+    {
+        return ['output' => $this->run('suggests', '--all', '--by-package')];
+    }
+
+    protected function assertInstalledPackage(string $name): void
+    {
+        if (! array_key_exists($name, $this->packages())) {
+            throw new RuntimeException('The requested package is not present in composer.lock.');
+        }
+    }
+
     protected function blockers(string $name, string $version): array
     {
         try {

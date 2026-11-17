@@ -18,6 +18,8 @@ A lightweight Laravel dashboard for monitoring Composer dependency health. Revie
 - **Security monitoring:** review Composer security audit advisories and affected versions.
 - **Abandoned packages:** identify packages marked as abandoned and suggested replacements.
 - **Update blockers:** inspect dependency constraints that prevent an update.
+- **Package inspection:** open installed package details with `composer show` or inspect dependency trees with `composer why`.
+- **On-demand diagnostics:** run `composer audit` and review `composer suggests` recommendations in dashboard modals.
 - **Dashboard and Artisan command:** run checks from the web interface or CLI.
 - **Six dashboard languages:** Turkish, English, Arabic, Spanish, Hindi and Simplified Chinese.
 - **Appearance preferences:** light, dark and system themes.

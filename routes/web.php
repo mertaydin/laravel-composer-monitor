@@ -11,5 +11,9 @@ Route::group([
 ], function () {
     Route::get('/', [ComposerMonitorController::class, 'index'])->name('index');
     Route::post('/check', [ComposerMonitorController::class, 'check'])->name('check');
+    Route::post('/package/show', [ComposerMonitorController::class, 'showPackage'])->name('package.show');
+    Route::post('/package/why', [ComposerMonitorController::class, 'whyPackage'])->name('package.why');
+    Route::post('/audit', [ComposerMonitorController::class, 'audit'])->name('audit');
+    Route::post('/suggests', [ComposerMonitorController::class, 'suggests'])->name('suggests');
     Route::post('/preferences', [ComposerMonitorController::class, 'preferences'])->name('preferences');
 });
