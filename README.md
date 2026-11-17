@@ -7,6 +7,10 @@
 
 A lightweight Laravel dashboard for monitoring Composer dependency health. Review installed packages, available updates, security advisories, abandoned dependencies and the constraints blocking updates — all from one place.
 
+## Screenshot
+
+![Laravel Composer Monitor dashboard](docs/images/dashboard.svg)
+
 ## Features
 
 - **Dependency inventory:** browse installed production and development packages, versions and direct/transitive status.
