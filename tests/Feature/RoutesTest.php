@@ -42,6 +42,22 @@ class RoutesTest extends TestCase
         $this->assertStringContainsString('Dependency alerts', $html);
     }
 
+    public function test_dashboard_uses_a_published_external_stylesheet_without_inline_styles(): void
+    {
+        $html = view('composer-monitor::index', [
+            'packages' => [],
+            'latest' => [],
+            'outdated' => [],
+            'advisories' => [],
+            'abandoned' => [],
+            'alerts' => [],
+        ])->render();
+
+        $this->assertStringContainsString('href="'.asset('vendor/composer-monitor/css/app.css').'"', $html);
+        $this->assertStringNotContainsString('<style', $html);
+        $this->assertDoesNotMatchRegularExpression('/\\sstyle\\s*=/', $html);
+    }
+
     public function test_dashboard_offers_all_six_languages(): void
     {
         $html = view('composer-monitor::dashboard', [

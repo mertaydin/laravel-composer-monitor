@@ -1,4 +1,5 @@
 @php($routeName = config('composer-monitor.route.name', 'composer-monitor.'))
+@once<link rel="stylesheet" href="{{ asset('vendor/composer-monitor/css/app.css') }}">@endonce
 <header class="topbar">
 <div class="brand"><div class="mark">C</div><div><h1>{{ __('composer-monitor::messages.title') }}</h1><p class="sub">{{ __('composer-monitor::messages.subtitle') }}</p></div></div>
 <div class="actions">
@@ -14,9 +15,9 @@
 @if(!empty($latest['error']))<div class="notice error">{{ __('composer-monitor::messages.error_title') }}: {{ $latest['error'] }}</div>@endif
 <section class="stats">
 <article class="stat"><div class="stat-label"><span class="dot"></span>{{ __('composer-monitor::messages.packages') }}</div><div class="stat-value">{{ count($packages) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.all_packages') }}</div></article>
-<article class="stat"><div class="stat-label"><span class="dot" style="background:var(--amber)"></span>{{ __('composer-monitor::messages.outdated') }}</div><div class="stat-value">{{ count($outdated) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.updates_title') }}</div></article>
-<article class="stat"><div class="stat-label"><span class="dot" style="background:var(--red)"></span>{{ __('composer-monitor::messages.vulnerable') }}</div><div class="stat-value">{{ array_sum(array_map(fn ($item) => count($item['advisories'] ?? []), $advisories)) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.security_title') }}</div></article>
-<article class="stat"><div class="stat-label"><span class="dot" style="background:var(--muted)"></span>{{ __('composer-monitor::messages.abandoned') }}</div><div class="stat-value">{{ count($abandoned) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.abandoned_title') }}</div></article>
+<article class="stat"><div class="stat-label"><span class="dot dot-amber"></span>{{ __('composer-monitor::messages.outdated') }}</div><div class="stat-value">{{ count($outdated) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.updates_title') }}</div></article>
+<article class="stat"><div class="stat-label"><span class="dot dot-red"></span>{{ __('composer-monitor::messages.vulnerable') }}</div><div class="stat-value">{{ array_sum(array_map(fn ($item) => count($item['advisories'] ?? []), $advisories)) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.security_title') }}</div></article>
+<article class="stat"><div class="stat-label"><span class="dot dot-muted"></span>{{ __('composer-monitor::messages.abandoned') }}</div><div class="stat-value">{{ count($abandoned) }}</div><div class="stat-foot">{{ __('composer-monitor::messages.abandoned_title') }}</div></article>
 </section>
 <section class="panel"><div class="panel-head"><h2>{{ __('composer-monitor::messages.alerts_title') }} <span class="count">{{ count($alerts ?? []) }}</span></h2></div>
 @forelse($alerts ?? [] as $alert)<div class="alert-row"><strong>{{ $alert['title'] }}</strong><span>{{ $alert['message'] }}</span><br><small>{{ !empty($alert['created_at']) ? \Illuminate\Support\Carbon::parse($alert['created_at'])->diffForHumans() : '' }}</small></div>@empty<div class="empty">{{ __('composer-monitor::messages.alerts_empty') }}</div>@endforelse</section>

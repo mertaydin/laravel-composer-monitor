@@ -46,6 +46,14 @@ The dashboard is available at `/composer-monitor` by default. To place it under 
 
 The dashboard will then be available at `/panel/super/composer-monitor`. Leading and trailing slashes are normalized automatically.
 
+Publish the dashboard stylesheet so it can be served as a same-origin external asset (compatible with strict `style-src` Content Security Policies):
+
+```bash
+php artisan vendor:publish --tag=composer-monitor-assets
+```
+
+If you deploy with a fresh release or remove the published assets, run this command again. The stylesheet is served from `public/vendor/composer-monitor/css/app.css`.
+
 Publish the configuration file to customize the package:
 
 ```bash
