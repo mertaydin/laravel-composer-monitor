@@ -1,14 +1,17 @@
 @php($routeName = config('composer-monitor.route.name', 'composer-monitor.'))
-@once<link rel="stylesheet" href="{{ asset('vendor/composer-monitor/css/app.css') }}">@endonce
+@once
+<link rel="stylesheet" href="{{ asset('vendor/composer-monitor/css/app.css') }}">
+<script src="{{ asset('vendor/composer-monitor/js/app.js') }}" defer></script>
+@endonce
 <header class="topbar">
 <div class="brand"><div class="mark">C</div><div><h1>{{ __('composer-monitor::messages.title') }}</h1><p class="sub">{{ __('composer-monitor::messages.subtitle') }}</p></div></div>
 <div class="actions">
 <span class="last">{{ __('composer-monitor::messages.last_checked') }} · {{ !empty($latest['checked_at']) ? \Illuminate\Support\Carbon::parse($latest['checked_at'])->diffForHumans() : __('composer-monitor::messages.never') }}</span>
-<form method="POST" action="{{ route($routeName.'preferences') }}">@csrf<label class="muted" for="locale-select">{{ __('composer-monitor::messages.language') }}</label> <select class="select" id="locale-select" name="locale" onchange="this.form.submit()">
+<form method="POST" action="{{ route($routeName.'preferences') }}" data-composer-monitor-preferences>@csrf<label class="muted" for="locale-select">{{ __('composer-monitor::messages.language') }}</label> <select class="select" id="locale-select" name="locale" >
 @foreach(['tr' => 'Türkçe', 'en' => 'English', 'ar' => 'العربية', 'es' => 'Español', 'hi' => 'हिन्दी', 'zh_CN' => '简体中文'] as $locale => $label)<option value="{{ $locale }}" @selected(app()->getLocale()===$locale)>{{ $label }}</option>@endforeach
 </select></form>
-<label class="muted" for="theme-select">{{ __('composer-monitor::messages.theme') }}</label><select class="select" id="theme-select" onchange="window.setComposerTheme(this.value)"><option value="system">{{ __('composer-monitor::messages.system') }}</option><option value="light">{{ __('composer-monitor::messages.light') }}</option><option value="dark">{{ __('composer-monitor::messages.dark') }}</option></select>
-<form method="POST" action="{{ route($routeName.'check') }}">@csrf<button class="btn" type="submit" onclick="this.disabled=true;this.textContent='…';this.form.submit()">{{ __('composer-monitor::messages.check_now') }}</button></form>
+<label class="muted" for="theme-select">{{ __('composer-monitor::messages.theme') }}</label><select class="select" id="theme-select" ><option value="system">{{ __('composer-monitor::messages.system') }}</option><option value="light">{{ __('composer-monitor::messages.light') }}</option><option value="dark">{{ __('composer-monitor::messages.dark') }}</option></select>
+<form method="POST" action="{{ route($routeName.'check') }}">@csrf<button class="btn" type="submit">{{ __('composer-monitor::messages.check_now') }}</button></form>
 </div></header>
 @if(session('status'))<div class="notice">{{ session('status') }}</div>@endif
 @if(session('error'))<div class="notice error">{{ session('error') }}</div>@endif

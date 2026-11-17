@@ -56,6 +56,8 @@ class RoutesTest extends TestCase
         $this->assertStringContainsString('href="'.asset('vendor/composer-monitor/css/app.css').'"', $html);
         $this->assertStringNotContainsString('<style', $html);
         $this->assertDoesNotMatchRegularExpression('/\\sstyle\\s*=/', $html);
+        $this->assertStringContainsString('src="'.asset('vendor/composer-monitor/js/app.js').'"', $html);
+        $this->assertDoesNotMatchRegularExpression('/\\son(click|change|input|submit)\\s*=/', $html);
     }
 
     public function test_dashboard_offers_all_six_languages(): void

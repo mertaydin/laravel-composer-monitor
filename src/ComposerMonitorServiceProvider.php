@@ -34,6 +34,7 @@ class ComposerMonitorServiceProvider extends ServiceProvider
 
         $this->publishes([
             dirname(__DIR__).'/resources/css' => public_path('vendor/composer-monitor/css'),
+            dirname(__DIR__).'/resources/js' => public_path('vendor/composer-monitor/js'),
         ], 'composer-monitor-assets');
 
         if (config('composer-monitor.route.enabled', true)) {

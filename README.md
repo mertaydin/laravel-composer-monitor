@@ -52,7 +52,7 @@ Publish the dashboard stylesheet so it can be served as a same-origin external a
 php artisan vendor:publish --tag=composer-monitor-assets
 ```
 
-If you deploy with a fresh release or remove the published assets, run this command again. The stylesheet is served from `public/vendor/composer-monitor/css/app.css`.
+If you deploy with a fresh release or remove the published assets, run this command again. The stylesheet and JavaScript are served from `public/vendor/composer-monitor/css/app.css` and `public/vendor/composer-monitor/js/app.js`.
 
 Publish the configuration file to customize the package:
 
