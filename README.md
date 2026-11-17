@@ -41,10 +41,11 @@ The dashboard is available at `/composer-monitor` by default. To place it under 
 ```php
 'route' => [
     'prefix' => 'panel/super/composer-monitor',
+    'middleware' => ['web', 'auth', 'super-admin', 'super-ip'],
 ],
 ```
 
-The dashboard will then be available at `/panel/super/composer-monitor`. Leading and trailing slashes are normalized automatically.
+The dashboard will then be available at `/panel/super/composer-monitor`. Leading and trailing slashes are normalized automatically. Add your application's access-control middleware to `route.middleware` so it protects every package route:
 
 Publish the configuration file to customize the package:
 
@@ -73,7 +74,7 @@ The dashboard includes six languages: Türkçe, English, العربية, Españo
 | `route.enabled` | `true` | Register the dashboard routes |
 | `route.prefix` | `composer-monitor` | Dashboard URL prefix; supports nested paths such as `panel/super/composer-monitor` |
 | `route.name` | `composer-monitor.` | Route name prefix |
-| `route.middleware` | `['web']` | Middleware applied to dashboard routes |
+| `route.middleware` | `['web', 'auth']` | Middleware applied to dashboard routes; supports application middleware such as `super-admin` and `super-ip` |
 | `layout` | `null` | Optional Blade layout to extend |
 | `composer_binary` | `composer` | Composer executable path |
 | `timeout` | `120` | Composer process timeout in seconds |
