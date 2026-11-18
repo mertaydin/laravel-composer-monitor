@@ -29,7 +29,7 @@ return [
     'why_package' => '为什么安装此软件包？',
     'command_result' => '命令结果',
     'close' => '关闭',
-    'loading' => '正在运行 Composer 命令…',
+    'loading' => '正在运行 composer update 命令…',
     'command_failed' => '无法完成 Composer 命令。',
     'no_command_output' => '没有可显示的结果。',
     'installed_version' => '已安装版本',
