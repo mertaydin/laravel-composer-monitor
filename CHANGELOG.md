@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.22 - 2026-11-18
+
+- Publish a patch release; no functional code changes.
+
 ## v0.1.21 - 2026-11-18
 
 - Clarify the loading message to state that the Composer update command is running in all supported languages.
