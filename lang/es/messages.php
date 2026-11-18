@@ -29,7 +29,7 @@ return [
     'why_package' => '¿Por qué está instalado este paquete?',
     'command_result' => 'Resultado del comando',
     'close' => 'Cerrar',
-    'loading' => 'Ejecutando comando de Composer…',
+    'loading' => 'Ejecutando el comando composer update…',
     'command_failed' => 'No se pudo ejecutar el comando de Composer.',
     'no_command_output' => 'No hay resultados para mostrar.',
     'installed_version' => 'Versión instalada',
