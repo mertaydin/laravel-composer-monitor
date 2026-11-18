@@ -29,7 +29,7 @@ return [
     'why_package' => 'Bu paket neden kurulu?',
     'command_result' => 'Komut çıktısı',
     'close' => 'Kapat',
-    'loading' => 'Composer komutu çalıştırılıyor…',
+    'loading' => 'Composer update komutu çalıştırılıyor…',
     'command_failed' => 'Composer komutu çalıştırılamadı.',
     'no_command_output' => 'Gösterilecek çıktı bulunamadı.',
     'installed_version' => 'Kurulu sürüm',
