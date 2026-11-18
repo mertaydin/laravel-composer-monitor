@@ -1,7 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## v0.1.21 - 2026-11-18
 
+- Clarify the loading message to state that the Composer update command is running in all supported languages.
 - Replace the full-screen dependency-check overlay with a slim animated progress bar fixed to the top of the dashboard while preserving the existing POST/redirect flow.
 
 ## v0.1.20 - 2026-11-17
