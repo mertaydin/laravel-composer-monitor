@@ -29,7 +29,7 @@ return [
     'why_package' => 'Why is this package installed?',
     'command_result' => 'Command output',
     'close' => 'Close',
-    'loading' => 'Running Composer command…',
+    'loading' => 'Running the composer update command…',
     'command_failed' => 'Composer command could not be completed.',
     'no_command_output' => 'No output is available.',
     'installed_version' => 'Installed version',
