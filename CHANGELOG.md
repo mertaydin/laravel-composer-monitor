@@ -3,6 +3,7 @@
 ## v0.1.23 - 2026-11-18
 
 - Refresh the README dashboard preview with the latest dependency inventory, update status, security advisory, and package health layout.
+- Publish the refreshed documentation preview.
 
 # Changelog
 
