@@ -29,7 +29,7 @@ return [
     'why_package' => 'यह पैकेज क्यों इंस्टॉल है?',
     'command_result' => 'कमांड परिणाम',
     'close' => 'बंद करें',
-    'loading' => 'Composer कमांड चल रहा है…',
+    'loading' => 'Composer update कमांड चलाया जा रहा है…',
     'command_failed' => 'Composer कमांड पूरा नहीं हो सका।',
     'no_command_output' => 'दिखाने के लिए कोई परिणाम नहीं है।',
     'installed_version' => 'इंस्टॉल किया गया संस्करण',
