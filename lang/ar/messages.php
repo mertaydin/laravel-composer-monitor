@@ -29,7 +29,7 @@ return [
     'why_package' => 'لماذا تم تثبيت هذه الحزمة؟',
     'command_result' => 'نتيجة الأمر',
     'close' => 'إغلاق',
-    'loading' => 'جارٍ تنفيذ أمر Composer…',
+    'loading' => 'جارٍ تشغيل أمر composer update…',
     'command_failed' => 'تعذر تنفيذ أمر Composer.',
     'no_command_output' => 'لا توجد نتائج للعرض.',
     'installed_version' => 'الإصدار المثبت',
