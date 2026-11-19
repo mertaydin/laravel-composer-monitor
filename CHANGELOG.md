@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.30 - 2026-11-19
+
+- Add automated browser capture of the live package dashboard and update the README screenshot.
+
+
 ## v0.1.29 - 2026-11-19
 
 - Make the centered scan loading dialog reliably paint before submitting the dependency check.
