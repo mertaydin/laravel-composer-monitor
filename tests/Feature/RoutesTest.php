@@ -40,6 +40,9 @@ class RoutesTest extends TestCase
         $this->assertStringContainsString('<!doctype html>', $html);
         $this->assertStringContainsString('Composer Monitor', $html);
         $this->assertStringContainsString('Dependency alerts', $html);
+        $this->assertStringContainsString('id="composer-monitor-page-loading"', $html);
+        $this->assertStringContainsString('class="page-loading-card"', $html);
+        $this->assertStringContainsString('class="page-loading-bar"', $html);
     }
 
     public function test_dashboard_uses_a_published_external_stylesheet_without_inline_styles(): void
@@ -53,7 +56,7 @@ class RoutesTest extends TestCase
             'alerts' => [],
         ])->render();
 
-        $this->assertStringContainsString('href="'.asset('vendor/composer-monitor/css/app.css').'?v=0.1.25"', $html);
+        $this->assertStringContainsString('href="'.asset('vendor/composer-monitor/css/app.css').'?v=0.1.26"', $html);
         $this->assertStringNotContainsString('<style', $html);
         $this->assertDoesNotMatchRegularExpression('/\\sstyle\\s*=/', $html);
         $this->assertStringContainsString('src="'.asset('vendor/composer-monitor/js/app.js').'?v=0.1.25"', $html);
