@@ -62,3 +62,13 @@
 .page-loading-bar{position:absolute;top:0;left:0;display:block;width:36%;height:100%;border-radius:0 3px 3px 0;background:var(--accent);box-shadow:0 0 12px color-mix(in srgb,var(--accent) 55%,transparent);animation:composer-monitor-progress 1.15s ease-in-out infinite}
 @keyframes composer-monitor-progress{0%{transform:translateX(-110%)}55%{transform:translateX(180%)}100%{transform:translateX(310%)}}
 @media(prefers-reduced-motion:reduce){.page-loading-bar{animation-duration:2.5s}}
+
+/* Restore the centered dependency-check loading dialog. */
+.page-loading[hidden]{display:none!important}
+.page-loading{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;height:auto;padding:24px;margin:0;overflow:hidden;pointer-events:auto;background:rgba(12,18,30,.58);backdrop-filter:blur(5px)}
+.page-loading-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:16px;width:min(360px,100%);min-width:230px;padding:30px 34px 34px;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.3);text-align:center}
+.page-loading-card strong{font-size:13px;font-weight:700}
+.page-loading-spinner{width:44px;height:44px;border:4px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:composer-monitor-spin .8s linear infinite}
+.page-loading-bar{position:relative;top:auto;left:auto;display:block;width:100%;height:4px;overflow:hidden;border-radius:99px;background:var(--line);box-shadow:none;animation:none}
+.page-loading-bar:after{content:"";display:block;width:38%;height:100%;border-radius:inherit;background:var(--accent);animation:composer-monitor-progress 1.15s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.page-loading-spinner,.page-loading-bar:after{animation-duration:2.5s}}
