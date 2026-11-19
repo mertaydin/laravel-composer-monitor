@@ -55,10 +55,10 @@ The dashboard will then be available at `/panel/super/composer-monitor`. Leading
 Publish the dashboard stylesheet so it can be served as a same-origin external asset (compatible with strict `style-src` Content Security Policies):
 
 ```bash
-php artisan vendor:publish --tag=composer-monitor-assets
+php artisan vendor:publish --tag=composer-monitor-assets --force
 ```
 
-If you deploy with a fresh release or remove the published assets, run this command again. The stylesheet and JavaScript are served from `public/vendor/composer-monitor/css/app.css` and `public/vendor/composer-monitor/js/app.js`.
+Run this command after installing the package and after every package update. The `--force` option is important: Laravel does not overwrite already-published files by default, so without it an older JavaScript file may remain in `public/` even when the Composer package has been updated. The stylesheet and JavaScript are served from `public/vendor/composer-monitor/css/app.css` and `public/vendor/composer-monitor/js/app.js`.
 
 Publish the configuration file to customize the package:
 
