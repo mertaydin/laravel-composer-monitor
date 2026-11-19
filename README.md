@@ -121,7 +121,7 @@ public function boot(): void
 }
 ```
 
-The callback receives the current request. Return `true` to allow access or `false` to respond with HTTP 403. The callback is optional; the package's `web` and `auth` middleware always apply.
+The callback receives the current request. Return `true` to allow access or `false` to respond with HTTP 403. The callback is required for access; without it, the package responds with HTTP 403. The package's `web` and `auth` middleware always apply.
 
 For production applications, do not expose the dashboard publicly.
 
