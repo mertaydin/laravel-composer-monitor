@@ -1,8 +1,8 @@
 # Laravel Composer Monitor
 
-[![Latest Version](https://img.shields.io/packagist/v/laravel-composer-monitor?label=Packagist)](https://packagist.org/packages/laravel-composer-monitor)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel-composer-monitor?label=downloads)](https://packagist.org/packages/laravel-composer-monitor)
-[![PHP](https://img.shields.io/packagist/php-v/laravel-composer-monitor?label=PHP)](https://packagist.org/packages/laravel-composer-monitor)
+[![Latest Version](https://img.shields.io/packagist/v/mertaydin/laravel-composer-monitor?label=Packagist)](https://packagist.org/packages/laravel-composer-monitor)
+[![Total Downloads](https://img.shields.io/packagist/dt/mertaydin/laravel-composer-monitor?label=downloads)](https://packagist.org/packages/laravel-composer-monitor)
+[![PHP](https://img.shields.io/packagist/php-v/mertaydin/laravel-composer-monitor?label=PHP)](https://packagist.org/packages/laravel-composer-monitor)
 [![Laravel](https://img.shields.io/badge/Laravel-10%20%7C%2011%20%7C%2012%20%7C%2013-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
 [![CI](https://github.com/mertaydin/laravel-composer-monitor/actions/workflows/tests.yml/badge.svg?branch=main&label=CI)](https://github.com/mertaydin/laravel-composer-monitor/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
