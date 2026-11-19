@@ -51,5 +51,11 @@
     "pint-test": "pint --test"
   },
   "minimum-stability": "stable",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": {
+      "phpstan/phpstan": "source",
+      "*": "dist"
+    }
+  }
 }
