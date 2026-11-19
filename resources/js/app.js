@@ -80,7 +80,8 @@
             overlay.hidden = false;
             overlay.setAttribute('aria-hidden', 'false');
 
-            // Wait for two animation frames so the overlay is painted before the POST navigation.
+            // Force layout and allow the centered overlay to paint before the scan request.
+            overlay.getBoundingClientRect();
             window.requestAnimationFrame(function () {
                 window.requestAnimationFrame(function () {
                     HTMLFormElement.prototype.submit.call(form);
