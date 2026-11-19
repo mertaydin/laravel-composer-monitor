@@ -10,7 +10,6 @@
 
 Composer bağımlılıklarının sağlığını izlemek için hafif bir Laravel yönetim paneli. Kurulu paketleri, mevcut güncellemeleri, güvenlik duyurularını, terk edilmiş bağımlılıkları ve güncellemeleri engelleyen sürüm kısıtlarını tek bir yerden inceleyin.
 
-[![Total Downloads](https://poser.pugx.org/mertaydin/laravel-composer-monitor/downloads)](https://packagist.org/packages/mertaydin/laravel-composer-monitor)
 
 ## Ekran görüntüsü
 
