@@ -4,6 +4,7 @@
 
 - Make the centered scan loading dialog reliably paint before submitting the dependency check.
 - Bump dashboard asset versions to prevent stale published JavaScript from suppressing the loader.
+- Update feature-test expectations for the published asset version.
 
 ## v0.1.28 - 2026-11-19
 
