@@ -80,9 +80,11 @@
             overlay.hidden = false;
             overlay.setAttribute('aria-hidden', 'false');
 
-            // Let the browser paint the centered dialog before the POST navigation starts.
+            // Wait for two animation frames so the overlay is painted before the POST navigation.
             window.requestAnimationFrame(function () {
-                form.submit();
+                window.requestAnimationFrame(function () {
+                    HTMLFormElement.prototype.submit.call(form);
+                });
             });
         });
 
