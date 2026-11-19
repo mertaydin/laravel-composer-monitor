@@ -41,18 +41,18 @@ class DashboardAuthorizationTest extends TestCase
         );
     }
 
-    public function test_authorization_is_allowed_when_no_callback_is_registered(): void
+    public function test_authorization_denies_access_when_no_callback_is_registered(): void
     {
         $authorizer = app(DashboardAuthorizer::class);
 
         $this->assertFalse($authorizer->isConfigured());
 
-        $response = app(AuthorizeDashboard::class)->handle(
+        $this->expectException(HttpException::class);
+
+        app(AuthorizeDashboard::class)->handle(
             Request::create('/composer-monitor'),
             fn () => response('allowed')
         );
-
-        $this->assertSame('allowed', $response->getContent());
     }
 
     public function test_dashboard_routes_use_authentication_and_authorization_middleware(): void
