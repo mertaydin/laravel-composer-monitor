@@ -76,6 +76,10 @@ php artisan composer-monitor:check
 
 The monitor reads your application's `composer.json` and `composer.lock`, then runs Composer's locked audit and outdated checks. It does not install, update or modify your dependencies.
 
+## Dependency check loading state
+
+Selecting **Check now** opens a centered loading dialog with a spinner and animated progress bar while the existing POST/redirect check runs. The submit button is disabled during the request to prevent duplicate scans.
+
 ## Language and appearance
 
 The dashboard includes six languages: Türkçe, English, العربية, Español, हिन्दी and 简体中文. Select a language from the dashboard header; the preference is stored in the current session. The appearance selector supports light, dark and system themes.
