@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.27 - 2026-11-19
+
+- Bump dashboard asset versions together so browsers cannot reuse a stale loading script or stylesheet.
+- Wait for the centered loading dialog to paint before submitting the dependency-check request.
+
+
 ## v0.1.26 - 2026-11-19
 
 - Keep the centered loading dialog visible for a browser paint before submitting the dependency check POST request.
