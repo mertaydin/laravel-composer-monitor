@@ -8,7 +8,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 
-[![Total Downloads](https://poser.pugx.org/mertaydin/laravel-composer-monitor/downloads)](https://packagist.org/packages/mertaydin/laravel-composer-monitor)
 
 A lightweight Laravel dashboard for monitoring Composer dependency health. Review installed packages, available updates, security advisories, abandoned dependencies and the constraints blocking updates — all from one place.
 
