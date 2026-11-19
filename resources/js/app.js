@@ -73,11 +73,17 @@
                 return;
             }
 
+            event.preventDefault();
             form.dataset.submitting = 'true';
             const button = form.querySelector('button[type="submit"]');
             if (button) button.disabled = true;
             overlay.hidden = false;
             overlay.setAttribute('aria-hidden', 'false');
+
+            // Let the browser paint the centered dialog before the POST navigation starts.
+            window.requestAnimationFrame(function () {
+                form.submit();
+            });
         });
 
         window.addEventListener('pageshow', function () {
