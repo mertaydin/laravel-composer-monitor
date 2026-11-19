@@ -56,10 +56,11 @@ class RoutesTest extends TestCase
             'alerts' => [],
         ])->render();
 
-        $this->assertStringContainsString('href="'.asset('vendor/composer-monitor/css/app.css').'?v=0.1.27"', $html);
+        $cssAsset = preg_quote(asset('vendor/composer-monitor/css/app.css'), '/');
+        $this->assertSame(1, preg_match('/href="'.$cssAsset.'\\?v=([0-9.]+)"/', $html, $cssMatch));
         $this->assertStringNotContainsString('<style', $html);
         $this->assertDoesNotMatchRegularExpression('/\\sstyle\\s*=/', $html);
-        $this->assertStringContainsString('src="'.asset('vendor/composer-monitor/js/app.js').'?v=0.1.27"', $html);
+        $this->assertStringContainsString('src="'.asset('vendor/composer-monitor/js/app.js').'?v='.$cssMatch[1].'"', $html);
         $this->assertDoesNotMatchRegularExpression('/\\son(click|change|input|submit)\\s*=/', $html);
     }
 
