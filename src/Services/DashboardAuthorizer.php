@@ -21,10 +21,8 @@ class DashboardAuthorizer
 
     public function allows(Request $request): bool
     {
-        if ($this->callback === null) {
-            return true;
-        }
-
-        return (bool) ($this->callback)($request);
+        // Dependency and security advisory data can expose application details.
+        // Require an explicit host-application authorization callback.
+        return $this->callback !== null && (bool) ($this->callback)($request);
     }
 }
