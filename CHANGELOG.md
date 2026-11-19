@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.29 - 2026-11-19
+
+- Make the centered scan loading dialog reliably paint before submitting the dependency check.
+- Bump dashboard asset versions to prevent stale published JavaScript from suppressing the loader.
+
 ## v0.1.28 - 2026-11-19
 
 - Clarify that published dashboard assets must be force-refreshed after package updates to avoid stale JavaScript and CSS files.
