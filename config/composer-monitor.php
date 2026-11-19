@@ -6,9 +6,6 @@ return [
         'prefix' => 'composer-monitor',
         'name' => 'composer-monitor.',
     ],
-    'authorization' => [
-        'gate' => 'viewComposerMonitor',
-    ],
     'layout' => null,
     'composer_binary' => env('COMPOSER_BINARY', 'composer'),
     'timeout' => 120,
