@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.25 - 2026-11-19
+
+- Restore the centered loading dialog and animated progress bar while the dependency check runs.
+- Keep the existing POST/redirect flow and prevent duplicate submissions.
+
+
 ## v0.1.24 - 2026-11-19
 
 - Patch release; retain the refreshed dependency dashboard preview and current Composer actions.
