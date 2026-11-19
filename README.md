@@ -133,3 +133,7 @@ The callback is the package's application-specific authorization mechanism. If n
 - [Changelog](CHANGELOG.md)
 - [GitHub releases](https://github.com/mertaydin/laravel-composer-monitor/releases)
 - [Report an issue or request a feature](https://github.com/mertaydin/laravel-composer-monitor/issues)
+
+---
+
+**Dil / Language:** [Türkçe README](README.tr.md) · [English README](README.md)
