@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "illuminate/support:12.*" "illuminate/console:12.*" "orchestra/testbench:^10.0" --no-interaction --no-update
-          composer update --prefer-dist --no-interaction
+          composer update --no-interaction
       - name: Run tests
         run: composer test
       - name: Check formatting
