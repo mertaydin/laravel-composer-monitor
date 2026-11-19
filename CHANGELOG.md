@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.28 - 2026-11-19
+
+- Clarify that published dashboard assets must be force-refreshed after package updates to avoid stale JavaScript and CSS files.
+
 ## v0.1.27 - 2026-11-19
 
 - Bump dashboard asset versions together so browsers cannot reuse a stale loading script or stylesheet.
