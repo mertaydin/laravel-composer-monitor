@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.24 - 2026-11-19
+
+- Patch release; retain the refreshed dependency dashboard preview and current Composer actions.
+
+
 ## v0.1.23 - 2026-11-18
 
 - Refresh the README dashboard preview with the latest dependency inventory, update status, security advisory, and package health layout.
