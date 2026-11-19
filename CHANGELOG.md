@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.26 - 2026-11-19
+
+- Keep the centered loading dialog visible for a browser paint before submitting the dependency check POST request.
+- Retain the spinner, animated progress bar, duplicate-submit protection, and POST/redirect behavior.
+
+
 ## v0.1.25 - 2026-11-19
 
 - Restore the centered loading dialog and animated progress bar while the dependency check runs.
