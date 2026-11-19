@@ -9,7 +9,9 @@ A lightweight Laravel dashboard for monitoring Composer dependency health. Revie
 
 ## Screenshot
 
-![Laravel Composer Monitor dashboard](docs/images/dashboard.svg)
+The screenshot is captured from the package's real dashboard in a temporary Laravel application by GitHub Actions.
+
+![Laravel Composer Monitor dashboard](docs/images/dashboard-screenshot.png)
 
 ## Features
 
