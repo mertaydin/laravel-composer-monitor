@@ -121,7 +121,7 @@ public function boot(): void
 }
 ```
 
-Callback mevcut isteği alır. Erişime izin vermek için `true`, HTTP 403 döndürmek için `false` döndürün. Callback isteğe bağlıdır; paketin `web` ve `auth` middleware'leri her zaman uygulanır.
+Callback mevcut isteği alır. Erişime izin vermek için `true`, HTTP 403 döndürmek için `false` döndürün. Erişim için callback zorunludur; callback yoksa paket HTTP 403 yanıtı verir. Paketin `web` ve `auth` middleware'leri her zaman uygulanır.
 
 Üretim ortamlarında paneli herkese açık şekilde sunmayın.
 
