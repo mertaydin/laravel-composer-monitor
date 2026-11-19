@@ -1,7 +1,7 @@
 @php($routeName = config('composer-monitor.route.name', 'composer-monitor.'))
 @once
-<link rel="stylesheet" href="{{ asset('vendor/composer-monitor/css/app.css') }}?v=0.1.28">
-<script src="{{ asset('vendor/composer-monitor/js/app.js') }}?v=0.1.28" defer></script>
+<link rel="stylesheet" href="{{ asset('vendor/composer-monitor/css/app.css') }}?v=0.1.29">
+<script src="{{ asset('vendor/composer-monitor/js/app.js') }}?v=0.1.29" defer></script>
 @endonce
 <header class="topbar">
 <div class="brand"><div class="mark">C</div><div><h1>{{ __('composer-monitor::messages.title') }}</h1><p class="sub">{{ __('composer-monitor::messages.subtitle') }}</p></div></div>
