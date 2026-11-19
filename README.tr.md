@@ -1,11 +1,16 @@
 # Laravel Composer Monitor
 
+[![Latest Version](https://img.shields.io/packagist/v/laravel-composer-monitor?label=Packagist)](https://packagist.org/packages/laravel-composer-monitor)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravel-composer-monitor?label=downloads)](https://packagist.org/packages/laravel-composer-monitor)
+[![PHP](https://img.shields.io/packagist/php-v/laravel-composer-monitor?label=PHP)](https://packagist.org/packages/laravel-composer-monitor)
+[![Laravel](https://img.shields.io/badge/Laravel-10%20%7C%2011%20%7C%2012%20%7C%2013-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
+[![CI](https://github.com/mertaydin/laravel-composer-monitor/actions/workflows/tests.yml/badge.svg?branch=main&label=CI)](https://github.com/mertaydin/laravel-composer-monitor/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+
 Composer bağımlılıklarının sağlığını izlemek için hafif bir Laravel yönetim paneli. Kurulu paketleri, mevcut güncellemeleri, güvenlik duyurularını, terk edilmiş bağımlılıkları ve güncellemeleri engelleyen sürüm kısıtlarını tek bir yerden inceleyin.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mertaydin/laravel-composer-monitor.svg?style=flat-square)](https://packagist.org/packages/mertaydin/laravel-composer-monitor)
 [![Total Downloads](https://poser.pugx.org/mertaydin/laravel-composer-monitor/downloads)](https://packagist.org/packages/mertaydin/laravel-composer-monitor)
-[![License](https://img.shields.io/packagist/l/mertaydin/laravel-composer-monitor.svg?style=flat-square)](LICENSE)
-[![Tests](https://img.shields.io/github/actions/workflow/status/mertaydin/laravel-composer-monitor/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mertaydin/laravel-composer-monitor/actions)
 
 ## Ekran görüntüsü
 
