@@ -256,3 +256,53 @@
         initializeComposerMonitor();
     }
 })();
+
+
+// Copy a safe, package-scoped Composer update command from the outdated packages table.
+(function () {
+    'use strict';
+    function initializePackageUpdateCommands() {
+        var rows = document.querySelectorAll('.panel table tbody tr');
+        rows.forEach(function (row) {
+            if (row.querySelector('[data-copy-composer-update]')) return;
+            var packageCell = row.querySelector('td:first-child');
+            if (!packageCell) return;
+            var packageName = (packageCell.querySelector('.pkg') || packageCell).textContent.trim();
+            if (!/^[a-z0-9_.-]+\/[a-z0-9_.-]+$/i.test(packageName)) return;
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.dataset.copyComposerUpdate = 'true';
+            button.className = 'btn btn-secondary';
+            button.textContent = 'Copy update command';
+            button.style.marginInlineStart = '8px';
+            button.addEventListener('click', async function () {
+                var command = 'composer update ' + packageName;
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(command);
+                    } else {
+                        var field = document.createElement('textarea');
+                        field.value = command;
+                        field.style.position = 'fixed';
+                        field.style.opacity = '0';
+                        document.body.appendChild(field);
+                        field.select();
+                        var copied = document.execCommand('copy');
+                        field.remove();
+                        if (!copied) throw new Error('Clipboard unavailable');
+                    }
+                    button.textContent = 'Copied!';
+                } catch (error) {
+                    button.textContent = 'Copy failed';
+                }
+                window.setTimeout(function () { button.textContent = 'Copy update command'; }, 1800);
+            });
+            packageCell.appendChild(button);
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePackageUpdateCommands, { once: true });
+    } else {
+        initializePackageUpdateCommands();
+    }
+})();
