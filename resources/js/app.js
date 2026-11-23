@@ -256,3 +256,96 @@
         initializeComposerMonitor();
     }
 })();
+
+
+// Copy a safe, package-scoped Composer update command from the outdated packages table.
+(function () {
+    'use strict';
+    function initializePackageUpdateCommands() {
+        var rows = document.querySelectorAll('.panel table tbody tr');
+        rows.forEach(function (row) {
+            if (row.querySelector('[data-copy-composer-update]')) return;
+            var packageCell = row.querySelector('td:first-child');
+            if (!packageCell) return;
+            var packageName = (packageCell.querySelector('.pkg') || packageCell).textContent.trim();
+            if (!/^[a-z0-9_.-]+\/[a-z0-9_.-]+$/i.test(packageName)) return;
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.dataset.copyComposerUpdate = 'true';
+            button.className = 'btn btn-secondary';
+            button.textContent = 'Copy update command';
+            button.style.marginInlineStart = '8px';
+            button.addEventListener('click', async function () {
+                var command = 'composer update ' + packageName;
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(command);
+                    } else {
+                        var field = document.createElement('textarea');
+                        field.value = command;
+                        field.style.position = 'fixed';
+                        field.style.opacity = '0';
+                        document.body.appendChild(field);
+                        field.select();
+                        var copied = document.execCommand('copy');
+                        field.remove();
+                        if (!copied) throw new Error('Clipboard unavailable');
+                    }
+                    button.textContent = 'Copied!';
+                } catch (error) {
+                    button.textContent = 'Copy failed';
+                }
+                window.setTimeout(function () { button.textContent = 'Copy update command'; }, 1800);
+            });
+            packageCell.appendChild(button);
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePackageUpdateCommands, { once: true });
+    } else {
+        initializePackageUpdateCommands();
+    }
+})();
+
+/* Browser-local package ignore list for keeping large dependency inventories focused. */
+(function () {
+    'use strict';
+    const key = 'composer-monitor-ignored-packages:v1';
+    function initializeIgnoredPackages() {
+        const table = document.querySelector('#packages-table tbody');
+        if (!table) return;
+        let ignored = [];
+        try { ignored = JSON.parse(localStorage.getItem(key) || '[]'); } catch (error) {}
+        if (!Array.isArray(ignored)) ignored = [];
+        const header = document.querySelector('#packages-table')?.closest('.panel')?.querySelector('.panel-head');
+        const toggle = document.createElement('button');
+        toggle.type = 'button'; toggle.className = 'btn btn-secondary';
+        let showIgnored = false;
+        const render = () => {
+            table.querySelectorAll('tr').forEach(row => {
+                const cell = row.querySelector('td:first-child');
+                const name = (cell?.querySelector('.pkg') || cell?.querySelector('a') || cell)?.textContent?.trim();
+                const isIgnored = ignored.includes(name);
+                row.querySelector('[data-ignore-package]')?.remove();
+                const actionCell = row.querySelector('td:last-child');
+                if (actionCell && name && /^[a-z0-9_.-]+\/[a-z0-9_.-]+$/i.test(name)) {
+                    const button = document.createElement('button');
+                    button.type = 'button'; button.dataset.ignorePackage = 'true';
+                    button.className = 'icon-btn'; button.textContent = isIgnored ? 'Unignore' : 'Ignore';
+                    button.addEventListener('click', () => {
+                        ignored = isIgnored ? ignored.filter(item => item !== name) : [...ignored, name];
+                        try { localStorage.setItem(key, JSON.stringify(ignored)); } catch (error) {}
+                        render();
+                    });
+                    actionCell.appendChild(button);
+                }
+                row.hidden = isIgnored && !showIgnored;
+            });
+            toggle.textContent = showIgnored ? 'Hide ignored packages' : 'Show ignored packages (' + ignored.length + ')';
+        };
+        toggle.addEventListener('click', () => { showIgnored = !showIgnored; render(); });
+        header?.appendChild(toggle); render();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeIgnoredPackages, {once:true});
+    else initializeIgnoredPackages();
+})();
