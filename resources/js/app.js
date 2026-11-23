@@ -306,3 +306,46 @@
         initializePackageUpdateCommands();
     }
 })();
+
+/* Browser-local package ignore list for keeping large dependency inventories focused. */
+(function () {
+    'use strict';
+    const key = 'composer-monitor-ignored-packages:v1';
+    function initializeIgnoredPackages() {
+        const table = document.querySelector('#packages-table tbody');
+        if (!table) return;
+        let ignored = [];
+        try { ignored = JSON.parse(localStorage.getItem(key) || '[]'); } catch (error) {}
+        if (!Array.isArray(ignored)) ignored = [];
+        const header = document.querySelector('#packages-table')?.closest('.panel')?.querySelector('.panel-head');
+        const toggle = document.createElement('button');
+        toggle.type = 'button'; toggle.className = 'btn btn-secondary';
+        let showIgnored = false;
+        const render = () => {
+            table.querySelectorAll('tr').forEach(row => {
+                const cell = row.querySelector('td:first-child');
+                const name = (cell?.querySelector('.pkg') || cell?.querySelector('a') || cell)?.textContent?.trim();
+                const isIgnored = ignored.includes(name);
+                row.querySelector('[data-ignore-package]')?.remove();
+                const actionCell = row.querySelector('td:last-child');
+                if (actionCell && name && /^[a-z0-9_.-]+\/[a-z0-9_.-]+$/i.test(name)) {
+                    const button = document.createElement('button');
+                    button.type = 'button'; button.dataset.ignorePackage = 'true';
+                    button.className = 'icon-btn'; button.textContent = isIgnored ? 'Unignore' : 'Ignore';
+                    button.addEventListener('click', () => {
+                        ignored = isIgnored ? ignored.filter(item => item !== name) : [...ignored, name];
+                        try { localStorage.setItem(key, JSON.stringify(ignored)); } catch (error) {}
+                        render();
+                    });
+                    actionCell.appendChild(button);
+                }
+                row.hidden = isIgnored && !showIgnored;
+            });
+            toggle.textContent = showIgnored ? 'Hide ignored packages' : 'Show ignored packages (' + ignored.length + ')';
+        };
+        toggle.addEventListener('click', () => { showIgnored = !showIgnored; render(); });
+        header?.appendChild(toggle); render();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeIgnoredPackages, {once:true});
+    else initializeIgnoredPackages();
+})();
